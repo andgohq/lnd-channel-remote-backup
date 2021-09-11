@@ -109,7 +109,7 @@ run_dropbox_backup () {
 
 run_backup_on_change () {
 	    echo "Copying backup file..."
-	    BACKUPFILE_TIMESTAMPED=$BACKUPFILE-$(date +%s)
+	    BACKUPFILE_TIMESTAMPED=$BACKUPFILE-$(date +%Y%m%dT%H%M%S)
 	    cp $SOURCEFILE $BACKUPFILE_TIMESTAMPED
 	    md5sum $SOURCEFILE > $BACKUPFILE_TIMESTAMPED.md5
 	    sed -i 's/\/.*\///g' $BACKUPFILE_TIMESTAMPED.md5
