@@ -17,9 +17,6 @@ BACKUPFOLDER="/home/umbrel/channel-backups"
 # --------------
 
 setup_files_and_folders () {
-	# Setup folders and filenames
-	BACKUPFOLDER=$DEVICE
-
 	# channel.backup file details
 	CHANFILEDIR=data/chain/bitcoin/mainnet
 	BACKUPFILE=channel.backup
