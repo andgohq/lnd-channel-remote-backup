@@ -22,16 +22,19 @@ sudo apt install -y inotify-tools jq
 nano umbrel-lnd-channel-backup.sh
 ```
 
+Edit the following line
+
 ```plain
 DROPBOX_APITOKEN="ADD_OAUTH_LONG_LIVED_TOKEN_WITH_WRITE_ACCESS_HERE"
 ```
 
-4. Setup script as systemd service:
+4. Setup script as systemd service
 
 ```sh
 sudo nano /etc/systemd/system/backup-channels.service
 ```
 
+Add the following lines:
 ```
 [Service]
 ExecStart=/home/umbrel/umbrel-lnd-channel-backup.sh
@@ -46,3 +49,39 @@ Group=umbrel
 [Install]
 WantedBy=multi-user.target
 ```
+
+
+Start
+
+```sh
+sudo systemctl start backup-channels
+```
+
+Monitor
+
+```sh
+journalctl -fu backup-channels
+```
+
+Run at boot
+
+```sh
+sudo systemctl enable backup-channels
+```
+
+## How to generate Dropbox access token
+
+1. Go to https://www.dropbox.com/developers/apps/create
+1. Select "Scoped access", "app folder" and type global unique App name
+
+  ![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-1.png)
+
+1. On Permissions tab, check `files.content.write` and Submit
+
+  ![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-2.png)
+
+  ![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-2.png)
+
+1. On Settings tab, click `Generate` button under the `Generated access token`
+
+Paste it to the `DROPBOX_APITOKEN` variable in the script
