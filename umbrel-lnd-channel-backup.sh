@@ -1,8 +1,4 @@
 #!/bin/bash
-# This script listens for changes to lnd's channel backup file
-# and when changes are detected, uploads the timestamped file to dropbox
-# Forked from https://gist.github.com/vindard/e0cd3d41bb403a823f3b5002488e3f90
-# See above link for dropbox API setup guide and systemd setup guide
 
 # SET DROPBOX API KEY FOR UPLOADS
 DROPBOX_APITOKEN="ADD_OAUTH_LONG_LIVED_TOKEN_WITH_WRITE_ACCESS_HERE"
@@ -11,51 +7,16 @@ DROPBOX_APITOKEN="ADD_OAUTH_LONG_LIVED_TOKEN_WITH_WRITE_ACCESS_HERE"
 DATADIR="/home/umbrel/umbrel/lnd"
 
 # SET WORK DIR
-WORKINGDIR="/home/umbrel/channel-backups"
+WORKINGDIR="/home/umbrel"
 
-# OPTIONAL SET A DEVICE NAME TO BE USED FOR BACKUPS (DEFAULTS TO /etc/hostname)
-DEVICE="umbrel"
+# SET A DEVICE NAME TO BE USED FOR BACKUPS
+BACKUPFOLDER="/home/umbrel/channel-backups"
 
-# INOTIFY CHECK
-# --------------
-
-install_inotify () {
-	sudo apt update
-	sudo apt install -y inotify-tools
-}
-
-inotifycheck () {
-	dpkg -s "inotify-tools" &> /dev/null
-	if [ ! $? -eq 0 ]; then
-	    install_inotify
-	fi
-}
-
-
-install_jq () {
-	sudo apt update
-	sudo apt install -y jq
-}
-
-jqcheck () {
-	dpkg -s "jq" &> /dev/null
-	if [ ! $? -eq 0 ]; then
-	    install_jq
-	fi
-}
 
 # SETUP
 # --------------
 
 setup_files_and_folders () {
-	# Fetches the user whose home folder the directories will be stored under
-	ADMINUSER=( $(ls /home | grep -v bitcoin) )
-
-	if [ -z "$DEVICE" ] ; then
-		DEVICE=$(echo $(cat /etc/hostname))
-	fi
-	DEVICE=$(echo $DEVICE | awk '{print tolower($0)}' | sed -e 's/ /-/g')
-
 	# Setup folders and filenames
 	BACKUPFOLDER=$DEVICE
 
@@ -165,8 +126,6 @@ run_backup_on_change () {
 }
 
 run () {
-	inotifycheck
-	jqcheck
 	setup_files_and_folders
 	run_backup_on_change
 	while true; do

@@ -5,4 +5,13 @@ This script is forked from https://github.com/jlopp/bitcoin-utils/blob/master/ln
 
 ## Setup
 
-TENTATIVE
+1. ssh to umbrel.
+
+2. Run the command:
+
+```sh
+wget
+
+sudo apt update
+sudo apt install -y inotify-tools jq
+```
