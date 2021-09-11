@@ -10,7 +10,7 @@ DATADIR="/home/umbrel/umbrel/lnd"
 WORKINGDIR="/home/umbrel"
 
 # SET A DEVICE NAME TO BE USED FOR BACKUPS
-BACKUPFOLDER="/home/umbrel/channel-backups"
+BACKUPFOLDER="channel-backups"
 
 
 # SETUP
@@ -87,7 +87,7 @@ upload_to_dropbox () {
 	    --data-binary @$1)
 	echo $FINISH
 	UPLOADTIME=$(echo $FINISH | jq -r .server_modified)
-	if [ ! -z $UPLOADTIME ] ; then
+	if [ "$UPLOADTIME" != "null" ] ; then
 		echo "Successfully uploaded!"
 	else
 		echo "Unknown error when uploading..."
