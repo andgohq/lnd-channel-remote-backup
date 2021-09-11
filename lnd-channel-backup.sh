@@ -7,8 +7,14 @@
 # SET DROPBOX API KEY FOR UPLOADS
 DROPBOX_APITOKEN="ADD_OAUTH_LONG_LIVED_TOKEN_WITH_WRITE_ACCESS_HERE"
 
+# SET LND DIR
+DATADIR="/home/umbrel/umbrel/lnd"
+
+# SET WORK DIR
+WORKINGDIR="/home/umbrel/channel-backups"
+
 # OPTIONAL SET A DEVICE NAME TO BE USED FOR BACKUPS (DEFAULTS TO /etc/hostname)
-DEVICE=""
+DEVICE="umbrel"
 
 # INOTIFY CHECK
 # --------------
@@ -51,8 +57,6 @@ setup_files_and_folders () {
 	DEVICE=$(echo $DEVICE | awk '{print tolower($0)}' | sed -e 's/ /-/g')
 
 	# Setup folders and filenames
-	DATADIR=/home/$ADMINUSER/.lnd
-	WORKINGDIR=/home/$ADMINUSER/.lnd/channel-backups
 	BACKUPFOLDER=$DEVICE
 
 	# channel.backup file details
