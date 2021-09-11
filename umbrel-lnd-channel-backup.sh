@@ -85,7 +85,7 @@ upload_to_dropbox () {
 	    --header "Dropbox-API-Arg: {\"path\": \"/"$BACKUPFOLDER"/"$1"\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}" \
 	    --header "Content-Type: application/octet-stream" \
 	    --data-binary @$1)
-	#echo $FINISH
+	echo $FINISH
 	UPLOADTIME=$(echo $FINISH | jq -r .server_modified)
 	if [ ! -z $UPLOADTIME ] ; then
 		echo "Successfully uploaded!"
