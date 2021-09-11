@@ -72,16 +72,16 @@ sudo systemctl enable backup-channels
 ## How to generate Dropbox access token
 
 1. Go to https://www.dropbox.com/developers/apps/create
-1. Select "Scoped access", "app folder" and type global unique App name
+2. Select "Scoped access", "app folder" and type globally unique app name
 
-  ![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-1.png)
+![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-1.png)
+3. On Permissions tab, check `files.content.write` and click the `Submit` button
 
-1. On Permissions tab, check `files.content.write` and Submit
+![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-2.png)
 
-  ![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-2.png)
+![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-3.png)
+4. On Settings tab, click `Generate` button under the `Generated access token`
 
-  ![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-2.png)
-
-1. On Settings tab, click `Generate` button under the `Generated access token`
+![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-4.png)
 
 Paste it to the `DROPBOX_APITOKEN` variable in the script
