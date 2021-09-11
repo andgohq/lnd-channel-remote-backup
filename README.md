@@ -80,7 +80,7 @@ sudo systemctl enable backup-channels
 ![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-2.png)
 
 ![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-3.png)
-4. On Settings tab, click `Generate` button under the `Generated access token`
+4. On Settings tab, select `No expiration` on the `Access token expiration` and click `Generate` button on the `Generated access token`
 
 ![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-4.png)
 
