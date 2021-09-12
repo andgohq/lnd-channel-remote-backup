@@ -75,8 +75,8 @@ RestartSec=1
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=lnd-channel-remote-backup
-User=admin
-Group=admin
+User=bitcoin
+Group=bitcoin
 
 [Install]
 WantedBy=multi-user.target
@@ -92,7 +92,7 @@ sudo systemctl start lnd-channel-remote-backup
 Monitor the log file.
 
 ```sh
-journalctl -fu lnd-channel-remote-backup
+sudo journalctl -fu lnd-channel-remote-backup
 ```
 
 If there is no problem, the backup file named `channel.backup_{date}` is stored in your Dropbox "Apps" folder.

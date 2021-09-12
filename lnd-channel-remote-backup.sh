@@ -22,7 +22,7 @@ DROPBOX_APITOKEN="ADD_OAUTH_LONG_LIVED_TOKEN_WITH_WRITE_ACCESS_HERE"
 #HOSTNAME="mynode"
 
 # SET A DIR NAME TO BE USED FOR BACKUPS
-BACKUPFOLDER="lnd-channel-remote-backup"
+BACKUPFOLDER=".lnd-channel-remote-backup"
 
 
 # SETUP
@@ -132,6 +132,8 @@ run_backup_on_change () {
 	    echo "---"
 	    echo "Uploading signature: '"${BACKUPFILE_TIMESTAMPED}.md5"'..."
 	    run_dropbox_backup $BACKUPFILE_TIMESTAMPED.md5
+
+			rm $BACKUPFILE_TIMESTAMPED
 }
 
 run () {
