@@ -3,8 +3,11 @@ Monitors LND's channel.backup file for changes and uploads those changes to Drop
 
 This script is for Umbrel only.
 
-
 This script is forked from https://github.com/jlopp/bitcoin-utils/blob/master/lnd-channel-backup-dropbox.sh
+
+## Requirements
+
+Umbrel: https://getumbrel.com/
 
 ## Setup
 
@@ -31,6 +34,9 @@ Edit the following line
 DROPBOX_APITOKEN="ADD_OAUTH_LONG_LIVED_TOKEN_WITH_WRITE_ACCESS_HERE"
 ```
 
+The api token is obtained by creating a new app in your dropbox account.
+The next section describes how to obtain a long lived token.
+
 4. Setup script as systemd service
 
 ```sh
@@ -38,6 +44,7 @@ sudo nano /etc/systemd/system/backup-channels.service
 ```
 
 Add the following lines:
+
 ```
 [Service]
 ExecStart=/home/umbrel/umbrel-lnd-channel-backup.sh
@@ -53,20 +60,21 @@ Group=umbrel
 WantedBy=multi-user.target
 ```
 
-
-Start
+After make the above file, start the service.
 
 ```sh
 sudo systemctl start backup-channels
 ```
 
-Monitor
+Monitor the log file.
 
 ```sh
 journalctl -fu backup-channels
 ```
 
-Run at boot
+If there is no problem, the backup file named `channel.backup_{date}` is stored in your Dropbox "Apps" folder.
+
+After confirm that, run the following command to set the service to start on boot.
 
 ```sh
 sudo systemctl enable backup-channels
