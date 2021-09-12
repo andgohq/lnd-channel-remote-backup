@@ -134,6 +134,7 @@ run_backup_on_change () {
 	    run_dropbox_backup $BACKUPFILE_TIMESTAMPED.md5
 
 			rm $BACKUPFILE_TIMESTAMPED
+			rm $BACKUPFILE_TIMESTAMPED.md5
 }
 
 run () {
