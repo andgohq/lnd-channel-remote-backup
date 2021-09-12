@@ -1,4 +1,4 @@
-# lnd-channel-backup
+# lnd-channel-remote-backup
 
 Monitors LND's channel.backup file for changes and uploads those changes to Dropbox when detected.
 
@@ -16,16 +16,16 @@ This script is forked from https://github.com/jlopp/bitcoin-utils/blob/master/ln
 2. Run the command:
 
 ```sh
-cd && wget -qN https://raw.githubusercontent.com/andgohq/lnd-channel-backup/main/lnd-channel-backup.sh && chmod +x lnd-channel-backup.sh
+cd && wget -qN https://raw.githubusercontent.com/andgohq/lnd-channel-remote-backup/main/lnd-channel-remote-backup.sh && chmod +x lnd-channel-remote-backup.sh
 
 sudo apt update
 sudo apt install -y inotify-tools jq
 ```
 
-3. Edit the lnd-channel-backup.sh file and set the following variables:
+3. Edit the lnd-channel-remote-backup.sh file and set the following variables:
 
 ```sh
-nano lnd-channel-backup.sh
+nano lnd-channel-remote-backup.sh
 ```
 
 Edit the following lines
@@ -45,19 +45,19 @@ The next section describes how to obtain a long lived token.
 4. Setup script as systemd service
 
 ```sh
-sudo nano /etc/systemd/system/backup-channels.service
+sudo nano /etc/systemd/system/lnd-channel-remote-backup.service
 ```
 
 [Umbrel] Add the following lines:
 
 ```
 [Service]
-ExecStart=/home/umbrel/lnd-channel-backup.sh
+ExecStart=/home/umbrel/lnd-channel-remote-backup.sh
 Restart=always
 RestartSec=1
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=backup-channels
+SyslogIdentifier=lnd-channel-remote-backup
 User=umbrel
 Group=umbrel
 
@@ -69,12 +69,12 @@ WantedBy=multi-user.target
 
 ```
 [Service]
-ExecStart=/home/admin/lnd-channel-backup.sh
+ExecStart=/home/admin/lnd-channel-remote-backup.sh
 Restart=always
 RestartSec=1
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=backup-channels
+SyslogIdentifier=lnd-channel-remote-backup
 User=admin
 Group=admin
 
@@ -108,14 +108,14 @@ sudo systemctl enable backup-channels
 1. Go to https://www.dropbox.com/developers/apps/create
 2. Select "Scoped access", "app folder" and type globally unique app name
 
-![Dropbox API 1](https://raw.githubusercontent.com/andgohq/lnd-channel-backup/main/images/dropbox-1.png)
+![Dropbox API 1](https://raw.githubusercontent.com/andgohq/lnd-channel-remote-backup/main/images/dropbox-1.png)
 3. On Permissions tab, check `files.content.write` and click the `Submit` button
 
-![Dropbox API 1](https://raw.githubusercontent.com/andgohq/lnd-channel-backup/main/images/dropbox-2.png)
+![Dropbox API 1](https://raw.githubusercontent.com/andgohq/lnd-channel-remote-backup/main/images/dropbox-2.png)
 
-![Dropbox API 1](https://raw.githubusercontent.com/andgohq/lnd-channel-backup/main/images/dropbox-3.png)
+![Dropbox API 1](https://raw.githubusercontent.com/andgohq/lnd-channel-remote-backup/main/images/dropbox-3.png)
 4. On Settings tab, select `No expiration` on the `Access token expiration` and click `Generate` button on the `Generated access token`
 
-![Dropbox API 1](https://raw.githubusercontent.com/andgohq/lnd-channel-backup/main/images/dropbox-4.png)
+![Dropbox API 1](https://raw.githubusercontent.com/andgohq/lnd-channel-remote-backup/main/images/dropbox-4.png)
 
 Paste it to the `DROPBOX_APITOKEN` variable in the script
