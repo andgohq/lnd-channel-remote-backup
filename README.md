@@ -86,13 +86,13 @@ WantedBy=multi-user.target
 After make the above file, start the service.
 
 ```sh
-sudo systemctl start backup-channels
+sudo systemctl start lnd-channel-remote-backup
 ```
 
 Monitor the log file.
 
 ```sh
-journalctl -fu backup-channels
+journalctl -fu lnd-channel-remote-backup
 ```
 
 If there is no problem, the backup file named `channel.backup_{date}` is stored in your Dropbox "Apps" folder.
@@ -100,7 +100,7 @@ If there is no problem, the backup file named `channel.backup_{date}` is stored 
 After confirm that, run the following command to set the service to start on boot.
 
 ```sh
-sudo systemctl enable backup-channels
+sudo systemctl enable lnd-channel-remote-backup
 ```
 
 ## How to generate Dropbox access token
