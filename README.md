@@ -1,37 +1,41 @@
-# umbrel-lnd-channel-backup
-Monitors LND's channel.backup file for changes and uploads those changes to Dropbox when detected.
+# lnd-channel-backup
 
-This script is for Umbrel only.
+Monitors LND's channel.backup file for changes and uploads those changes to Dropbox when detected.
 
 This script is forked from https://github.com/jlopp/bitcoin-utils/blob/master/lnd-channel-backup-dropbox.sh
 
-## Requirements
+## Support environments
 
-Umbrel: https://getumbrel.com/
+- Umbrel - https://getumbrel.com/
+- myNode - https://mynodebtc.com/
 
 ## Setup
 
-1. ssh to umbrel.
+1. ssh to umbrel / myNode
 
 2. Run the command:
 
 ```sh
-cd && wget -qN https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/umbrel-lnd-channel-backup.sh && chmod +x umbrel-lnd-channel-backup.sh
+cd && wget -qN https://raw.githubusercontent.com/andgohq/lnd-channel-backup/main/lnd-channel-backup.sh && chmod +x lnd-channel-backup.sh
 
 sudo apt update
 sudo apt install -y inotify-tools jq
 ```
 
-3. Edit the umbrel-lnd-channel-backup.sh file and set the following variables:
+3. Edit the lnd-channel-backup.sh file and set the following variables:
 
 ```sh
-nano umbrel-lnd-channel-backup.sh
+nano lnd-channel-backup.sh
 ```
 
-Edit the following line
+Edit the following lines
 
 ```plain
+# set the api token obtained from the Dropbox
 DROPBOX_APITOKEN="ADD_OAUTH_LONG_LIVED_TOKEN_WITH_WRITE_ACCESS_HERE"
+# enable these lines based on your environment
+DATADIR=...
+WORKINGDIR=...
 ```
 
 The api token is obtained by creating a new app in your dropbox account.
@@ -47,7 +51,7 @@ Add the following lines:
 
 ```
 [Service]
-ExecStart=/home/umbrel/umbrel-lnd-channel-backup.sh
+ExecStart=/home/umbrel/lnd-channel-backup.sh
 Restart=always
 RestartSec=1
 StandardOutput=syslog
@@ -85,14 +89,14 @@ sudo systemctl enable backup-channels
 1. Go to https://www.dropbox.com/developers/apps/create
 2. Select "Scoped access", "app folder" and type globally unique app name
 
-![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-1.png)
+![Dropbox API 1](https://raw.githubusercontent.com/andgohq/lnd-channel-backup/main/images/dropbox-1.png)
 3. On Permissions tab, check `files.content.write` and click the `Submit` button
 
-![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-2.png)
+![Dropbox API 1](https://raw.githubusercontent.com/andgohq/lnd-channel-backup/main/images/dropbox-2.png)
 
-![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-3.png)
+![Dropbox API 1](https://raw.githubusercontent.com/andgohq/lnd-channel-backup/main/images/dropbox-3.png)
 4. On Settings tab, select `No expiration` on the `Access token expiration` and click `Generate` button on the `Generated access token`
 
-![Dropbox API 1](https://raw.githubusercontent.com/andgohq/umbrel-lnd-channel-backup/main/images/dropbox-4.png)
+![Dropbox API 1](https://raw.githubusercontent.com/andgohq/lnd-channel-backup/main/images/dropbox-4.png)
 
 Paste it to the `DROPBOX_APITOKEN` variable in the script

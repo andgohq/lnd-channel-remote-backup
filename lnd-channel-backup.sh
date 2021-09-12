@@ -4,10 +4,16 @@
 DROPBOX_APITOKEN="ADD_OAUTH_LONG_LIVED_TOKEN_WITH_WRITE_ACCESS_HERE"
 
 # SET LND DIR
-DATADIR="/home/umbrel/umbrel/lnd"
+## Umbrel
+#DATADIR="/home/umbrel/umbrel/lnd"
+## myNode
+#DATADIR="/mnt/hdd/mynode/lnd"
 
-# SET WORK DIR
-WORKINGDIR="/home/umbrel"
+# SET WORKING DIR
+## Umbrel
+#WORKINGDIR="/home/umbrel"
+## myNode
+#WORKINGDIR="/mnt/hdd/mynode"
 
 # SET A DEVICE NAME TO BE USED FOR BACKUPS
 BACKUPFOLDER="channel-backups"
