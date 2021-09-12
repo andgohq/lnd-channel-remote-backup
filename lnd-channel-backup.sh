@@ -15,8 +15,14 @@ DROPBOX_APITOKEN="ADD_OAUTH_LONG_LIVED_TOKEN_WITH_WRITE_ACCESS_HERE"
 ## myNode
 #WORKINGDIR="/mnt/hdd/mynode"
 
-# SET A DEVICE NAME TO BE USED FOR BACKUPS
-BACKUPFOLDER="channel-backups"
+# SET A HOST NAME TO BE USED FOR DROPBOX UPLOADS
+## Umbrel
+#HOSTNAME="umbrel"
+## myNode
+#HOSTNAME="mynode"
+
+# SET A DIR NAME TO BE USED FOR BACKUPS
+BACKUPFOLDER="lnd-channel-backup"
 
 
 # SETUP
@@ -88,7 +94,7 @@ dropbox_upload_check () {
 upload_to_dropbox () {
 	FINISH=$(curl -s -X POST https://content.dropboxapi.com/2/files/upload \
 	    --header "Authorization: Bearer "${DROPBOX_APITOKEN}"" \
-	    --header "Dropbox-API-Arg: {\"path\": \"/"$BACKUPFOLDER"/"$1"\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}" \
+	    --header "Dropbox-API-Arg: {\"path\": \"/"$HOSTNAME"/"$1"\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}" \
 	    --header "Content-Type: application/octet-stream" \
 	    --data-binary @$1)
 	# echo $FINISH
