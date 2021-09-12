@@ -36,6 +36,7 @@ DROPBOX_APITOKEN="ADD_OAUTH_LONG_LIVED_TOKEN_WITH_WRITE_ACCESS_HERE"
 # enable these lines based on your environment
 DATADIR=...
 WORKINGDIR=...
+HOSTNAME=...
 ```
 
 The api token is obtained by creating a new app in your dropbox account.
@@ -47,7 +48,7 @@ The next section describes how to obtain a long lived token.
 sudo nano /etc/systemd/system/backup-channels.service
 ```
 
-Add the following lines:
+[Umbrel] Add the following lines:
 
 ```
 [Service]
@@ -63,6 +64,24 @@ Group=umbrel
 [Install]
 WantedBy=multi-user.target
 ```
+
+[myNode] Add the following lines:
+
+```
+[Service]
+ExecStart=/home/admin/lnd-channel-backup.sh
+Restart=always
+RestartSec=1
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=backup-channels
+User=admin
+Group=admin
+
+[Install]
+WantedBy=multi-user.target
+```
+
 
 After make the above file, start the service.
 
